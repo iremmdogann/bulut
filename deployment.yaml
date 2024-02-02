@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 3 # Kaç kopya çalıştırılacağını belirtir
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp-container
+          image: docker/welcome-to-docker:latest # Docker imajınızın adı ve sürümünü belirtir
+          ports:
+            - containerPort: 80 # Konteynerin hangi portunun açılacağını belirtir
+      imagePullSecrets:
+        - name: my-image-pull-secret # Docker imajını çekmek için gerekli kimlik bilgilerini sağlar
